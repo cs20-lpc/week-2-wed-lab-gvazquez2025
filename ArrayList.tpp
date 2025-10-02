@@ -1,5 +1,6 @@
 template <typename T>
 ArrayList<T>::ArrayList(int i) {
+    // TODO
     if (i <= 0) {
         throw string("constructor: invalid size");
     }
@@ -29,6 +30,7 @@ ArrayList<T>::~ArrayList() {
 
 template <typename T>
 void ArrayList<T>::append(const T& elem) {
+    // TODO
     if (isFull()) {
         throw string("append: error, list is full");
     }
@@ -38,6 +40,7 @@ void ArrayList<T>::append(const T& elem) {
 
 template <typename T>
 void ArrayList<T>::clear() {
+    // TODO
     delete[] buffer;
     buffer = nullptr;
     this->length = 0;
@@ -46,6 +49,7 @@ void ArrayList<T>::clear() {
 
 template <typename T>
 void ArrayList<T>::copy(const ArrayList<T>& copyObj) {
+    // TODO
     maxSize = copyObj.maxSize;
     this->length = copyObj.length;
     buffer = new T[maxSize];
@@ -56,6 +60,7 @@ void ArrayList<T>::copy(const ArrayList<T>& copyObj) {
 
 template <typename T>
 T ArrayList<T>::getElement(int position) const {
+    // TODO
     if (position < 0 || position >= this->length) {
         throw string("getElement: error, position out of bounds");
     }
@@ -63,7 +68,18 @@ T ArrayList<T>::getElement(int position) const {
 }
 
 template <typename T>
+int ArrayList<T>::getLength() const {
+    return this->length;
+}
+
+template <typename T>
+int ArrayList<T>::getMaxSize() const {
+    return maxSize;
+}
+
+template <typename T>
 void ArrayList<T>::insert(int position, const T& elem) {
+    // TODO
     if (isFull()) {
         throw string("insert: error, list is full");
     }
@@ -78,7 +94,18 @@ void ArrayList<T>::insert(int position, const T& elem) {
 }
 
 template <typename T>
+bool ArrayList<T>::isEmpty() const {
+    return this->length == 0;
+}
+
+template <typename T>
+bool ArrayList<T>::isFull() const {
+    return this->length == maxSize;
+}
+
+template <typename T>
 void ArrayList<T>::remove(int position) {
+    // TODO
     if (position < 0 || position >= this->length) {
         throw string("remove: error, position out of bounds");
     }
@@ -90,8 +117,24 @@ void ArrayList<T>::remove(int position) {
 
 template <typename T>
 void ArrayList<T>::replace(int position, const T& elem) {
+    // TODO
     if (position < 0 || position >= this->length) {
         throw string("replace: error, position out of bounds");
     }
     buffer[position] = elem;
+}
+
+template <typename T>
+ostream& operator<<(ostream& outStream, const ArrayList<T>& myObj) {
+    if (myObj.isEmpty()) {
+        outStream << "List is empty, no elements to display.\n";
+    }
+    else {
+        for (int i = 0; i < myObj.length; i++) {
+            outStream << myObj.buffer[i] << ' ';
+        }
+        outStream << endl;
+    }
+
+    return outStream;
 }
